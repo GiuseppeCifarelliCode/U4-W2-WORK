@@ -1,19 +1,19 @@
 SELECT COUNT(*) AS TotVerbali FROM VERBALE
 
-SELECT Cognome, COUNT(*) AS TotVerbali FROM VERBALE
+SELECT ANAGRAFICA.idAnagrafica,cognome,nome, COUNT(*) AS TotVerbali FROM VERBALE
 INNER JOIN ANAGRAFICA 
 ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
-GROUP BY Cognome
+GROUP BY ANAGRAFICA.idAnagrafica,cognome,nome
 
 SELECT descrizione, COUNT(*) AS TotVerbali FROM VERBALE
 INNER JOIN TIPOVIOLAZIONE 
 ON TIPOVIOLAZIONE.idViolazione = VERBALE.idViolazione
 GROUP BY descrizione
 
-SELECT Cognome, SUM(decurtamentoPunti) AS TotPuntiPersi FROM VERBALE
+SELECT ANAGRAFICA.idAnagrafica,cognome,nome, SUM(decurtamentoPunti) AS TotPuntiPersi FROM VERBALE
 INNER JOIN ANAGRAFICA 
 ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
-GROUP BY Cognome
+GROUP BY ANAGRAFICA.idAnagrafica,cognome,nome
 
 SELECT cognome, nome, citta, indirizzoViolazione, importo, decurtamentoPunti FROM VERBALE
 INNER JOIN ANAGRAFICA
@@ -23,12 +23,12 @@ WHERE citta = 'Palermo'
 SELECT cognome, nome, indirizzo, dataViolazione, importo, decurtamentoPunti FROM VERBALE
 INNER JOIN ANAGRAFICA
 ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
-WHERE dataViolazione BETWEEN '2009-02-01' AND '2009-06-30'
+WHERE dataViolazione BETWEEN '2009-02-01' AND '2009-07-31'
 
-SELECT cognome, nome, SUM(importo) as TotImporto FROM VERBALE
+SELECT ANAGRAFICA.idAnagrafica,cognome,nome, SUM(importo) as TotImporto FROM VERBALE
 INNER JOIN ANAGRAFICA 
 ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
-GROUP BY cognome, nome
+GROUP BY ANAGRAFICA.idAnagrafica,cognome,nome
 
 SELECT * FROM ANAGRAFICA
 WHERE citta ='Palermo'
