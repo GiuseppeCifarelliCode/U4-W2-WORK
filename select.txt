@@ -1,0 +1,47 @@
+SELECT COUNT(*) AS TotVerbali FROM VERBALE
+
+SELECT Cognome, COUNT(*) AS TotVerbali FROM VERBALE
+INNER JOIN ANAGRAFICA 
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+GROUP BY Cognome
+
+SELECT descrizione, COUNT(*) AS TotVerbali FROM VERBALE
+INNER JOIN TIPOVIOLAZIONE 
+ON TIPOVIOLAZIONE.idViolazione = VERBALE.idViolazione
+GROUP BY descrizione
+
+SELECT Cognome, SUM(decurtamentoPunti) AS TotPuntiPersi FROM VERBALE
+INNER JOIN ANAGRAFICA 
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+GROUP BY Cognome
+
+SELECT cognome, nome, citta, indirizzoViolazione, importo, decurtamentoPunti FROM VERBALE
+INNER JOIN ANAGRAFICA
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+WHERE citta = 'Palermo'
+
+SELECT cognome, nome, indirizzo, dataViolazione, importo, decurtamentoPunti FROM VERBALE
+INNER JOIN ANAGRAFICA
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+WHERE dataViolazione BETWEEN '2009-02-01' AND '2009-06-30'
+
+SELECT cognome, nome, SUM(importo) as TotImporto FROM VERBALE
+INNER JOIN ANAGRAFICA 
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+GROUP BY cognome, nome
+
+SELECT * FROM ANAGRAFICA
+WHERE citta ='Palermo'
+
+SELECT nominativoAgente, COUNT(*) as TotVerbali FROM VERBALE
+GROUP BY nominativoAgente
+
+SELECT cognome, nome, indirizzo, dataViolazione, importo, decurtamentoPunti FROM VERBALE
+INNER JOIN ANAGRAFICA
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+WHERE decurtamentoPunti > 5
+
+SELECT cognome, nome, indirizzo, dataViolazione, importo, decurtamentoPunti FROM VERBALE
+INNER JOIN ANAGRAFICA
+ON ANAGRAFICA.idAnagrafica = VERBALE.idAnagrafica
+WHERE importo > 400

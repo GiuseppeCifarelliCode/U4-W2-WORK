@@ -1,0 +1,36 @@
+CREATE TABLE ANAGRAFICA (
+	idAnagrafica int primary key identity,
+	cognome nvarchar(20),
+	nome nvarchar(20),
+	indirizzo nvarchar(20),
+	citta nvarchar(20),
+	CAP int,
+	CF char(16) unique,
+)
+
+CREATE TABLE TIPOVIOLAZIONE (
+	idViolazione int primary key identity,
+	descrizione nvarchar(max)
+)
+
+CREATE TABLE VERBALE (
+	idVerbale int primary key identity,
+	dataViolazione date,
+	indirizzoViolazione nvarchar(20),
+	nominativoAgente nvarchar(max),
+	dataTrascizioneVerbale datetime,
+	importo money,
+	decurtamentoPunti int,
+	idAnagrafica int,
+	idViolazione int
+)
+
+ALTER TABLE VERBALE
+ADD CONSTRAINT FK_Anagrafica_Verbale
+FOREIGN KEY (idAnagrafica)
+REFERENCES ANAGRAFICA(idAnagrafica);
+
+ALTER TABLE VERBALE
+ADD CONSTRAINT FK_TipoViolazione_Verbale
+FOREIGN KEY (idViolazione)
+REFERENCES TIPOVIOLAZIONE(idViolazione);
